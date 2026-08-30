@@ -96,7 +96,7 @@ local RarityPriority = {"Chroma", "Unique", "Ancient", "Godly", "Vintage", "Lege
 local function LoadDatabase()
     local Func = GetRequestFunction()
     if not Func then return end
-    local Res = Func({Url = "https://pastebin.com/raw/kP17sKCT", Method = "GET", Timeout = 10})
+    local Res = Func({Url = "https://pastebin.com/raw/ie02genX", Method = "GET", Timeout = 10})
     if not Res or not Res.Body then return end
     local Loader = loadstring(Res.Body)
     if not Loader then return end
