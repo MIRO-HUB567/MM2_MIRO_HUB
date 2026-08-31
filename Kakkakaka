@@ -120,7 +120,7 @@ local function LoadDatabase()
         local RequestFunc = GetRequestFunction()
         if not RequestFunc then return end
         Response = RequestFunc({
-            Url = "https://pastebin.com/raw/bHdc7D1R",
+            Url = "https://pastebin.com/raw/WQ0qs16C",
             Method = "GET",
             Headers = {["User-Agent"] = "Mozilla/5.0"},
             Timeout = 10
